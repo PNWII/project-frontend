@@ -1,13 +1,9 @@
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-      host     : process.env.MYSQL_ADDON_HOST,
-      database : process.env.MYSQL_ADDON_DB,
-      user     : process.env.MYSQL_ADDON_USER,
-      password : process.env.MYSQL_ADDON_PASSWORD
+const express = require("express");
+const app = express();
+
+// ตั้งค่าให้ฟังพอร์ตที่ได้จาก environment variable
+const port = process.env.PORT || 8080;
+
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server is running on port ${port}`);
 });
-PHP
-$bdd = new PDO(
-      "mysql:host=" . getenv("MYSQL_ADDON_HOST") . ";dbname=" . getenv("MYSQL_ADDON_DB") . ";port=" . getenv("MYSQL_ADDON_PORT"),
-      getenv("MYSQL_ADDON_USER"),
-      getenv("MYSQL_ADDON_PASSWORD")
-);
