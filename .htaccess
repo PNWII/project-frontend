@@ -5,8 +5,8 @@ RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
 RewriteRule ^ - [L]
 
-# If the requested resource doesn't exist, use index.html (for Single Page Application routing)
-RewriteRule ^ /index.html
+# If the requested resource doesn't exist, use index.html (for SPA routing)
+RewriteRule ^ /index.html [L]
 
 <IfModule mod_mime.c>
   # Correct MIME types for React and other static assets
@@ -16,23 +16,4 @@ RewriteRule ^ /index.html
   AddType application/json .json
   AddType image/svg+xml .svg
   AddType font/woff2 .woff2
-</IfModule>
-
-# Prerender configuration (for SEO purposes)
-<IfModule mod_headers.c>
-    RequestHeader set X-Prerender-Token "<PRERENDER_TOKEN>"
-    RequestHeader set X-Prerender-Version "prerender-apache@2.0.0"
-</IfModule>
-
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-
-    <IfModule mod_proxy_http.c>
-        # Detect known bots and send requests for prerendering
-        RewriteCond %{HTTP_USER_AGENT} googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator|whatsapp|redditbot|applebot|flipboard|tumblr|bitlybot|skypeuripreview|nuzzel|discordbot|google\ page\ speed|qwantify|bitrix\ link\ preview|xing-contenttabreceiver|google-inspectiontool|chrome-lighthouse|telegrambot [NC,OR]
-        RewriteCond %{QUERY_STRING} _escaped_fragment_
-        RewriteCond %{REQUEST_URI} ^(?!.*?(\.js|\.css|\.xml|\.less|\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.txt|\.ico|\.rss|\.zip|\.mp3|\.rar|\.exe|\.wmv|\.doc|\.avi|\.ppt|\.mpg|\.mpeg|\.tif|\.wav|\.mov|\.psd|\.ai|\.xls|\.mp4|\.m4a|\.swf|\.dat|\.dmg|\.iso|\.flv|\.m4v|\.torrent|\.ttf|\.woff|\.svg))
-
-        RewriteRule ^(index\.html|index\.php)?(.*) http://service.prerender.io/%{REQUEST_SCHEME}://%{HTTP_HOST}$2 [P,END]
-    </IfModule>
 </IfModule>
