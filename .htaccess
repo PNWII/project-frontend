@@ -1,19 +1,5 @@
-RewriteEngine On
-
-# If an existing asset or directory is requested, serve it
-RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
-RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
-RewriteRule ^ - [L]
-
-# If the requested resource doesn't exist, use index.html (for SPA routing)
-RewriteRule ^ /index.html [L]
-
 <IfModule mod_mime.c>
-  # Correct MIME types for React and other static assets
-  AddType application/javascript .js
-  AddType application/javascript .jsx
-  AddType text/css .css
-  AddType application/json .json
-  AddType image/svg+xml .svg
+  AddType application/javascript .js AddType application/javascript .jsx AddType
+  text/css .css AddType application/json .json AddType image/svg+xml .svg
   AddType font/woff2 .woff2
 </IfModule>

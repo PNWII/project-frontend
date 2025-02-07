@@ -333,6 +333,7 @@ function App() {
         {/* เส้นทางสำรอง */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <>Hello World!</>
     </Router>
   );
 }
