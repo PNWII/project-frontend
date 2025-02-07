@@ -5,7 +5,8 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: "0.0.0.0",
-    port: process.env.PORT || 8080, // ใช้ตัวแปรสภาพแวดล้อม PORT หรือ 8080
+    host: "0.0.0.0", // ทำให้เซิร์ฟเวอร์สามารถเข้าถึงจากภายนอกได้
+    port: 4173, // ใช้พอร์ต 8080 โดยตรง
+    open: true, // เปิดหน้าเว็บในเบราว์เซอร์อัตโนมัติ
   },
 });
